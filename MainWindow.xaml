@@ -5,8 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FolderCompare"
         mc:Ignorable="d"
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <!--Source Folder-->
+            <RowDefinition Height="Auto"/>
+            <!--Destination Folder-->
+            <RowDefinition Height="Auto"/>
+            <!--start button -->
+            <RowDefinition Height="Auto"/>
+            <!--results-->
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Source Folder" Grid.Column="0" Grid.Row="0"></Label>
+        <Button Content="Select Folder" Grid.Row="0" Grid.Column="1" Command="{Binding CallGetSourceFolderCommand}"/>
+        <TextBox Grid.Column="2" Grid.Row="0" Text="{Binding SourceFolder}"></TextBox>
+        <Label Content="Destination Folder" Grid.Column="0" Grid.Row="1" ></Label>
+        <Button Content="Select Folder" Grid.Row="1" Grid.Column="1" Command="{Binding CallGetDesinationFolderCommand}"/>
+        <TextBox Grid.Column="2" Grid.Row="1" Text="{Binding DestinationFolder}"></TextBox>
+        <Button Content="Start Process" Grid.Row="2" Grid.ColumnSpan="3" Command="{Binding CallProcessCommand}"/>
+        <Grid Grid.Row="3" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Content="Result" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0"/>
+            <Grid Grid.Row="1" Grid.Column="0">
+                <DataGrid ItemsSource="{Binding DisplayFiles}" AutoGenerateColumns="True"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
